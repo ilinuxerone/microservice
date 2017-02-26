@@ -32,6 +32,12 @@ public class User {
         this.age = age;
     }
 
-/*    public User() {
-    }*/
+    public User() {
+    }
+
+    public User(Long id, String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
 }
