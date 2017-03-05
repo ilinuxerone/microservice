@@ -14,6 +14,17 @@ public class BlogProperties {
     @Value("${com.example.blog.title}")
     private String title;
 
+    @Value("${com.example.blog.desc}")
+    private String desc;
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     public String getName() {
         return name;
     }

@@ -19,6 +19,7 @@ public class ConfigApplicationTests {
 	public void getHello() {
 		Assert.assertEquals(blogProperties.getName(), "zzh");
 		Assert.assertEquals(blogProperties.getTitle(), "hello springboot");
+		Assert.assertEquals(blogProperties.getDesc(),"zzhpractice hello springboot");
 	}
 
 }
