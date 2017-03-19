@@ -1,0 +1,22 @@
+spring:
+  application:
+    name:  ribbon-consumer
+server:
+  port: 3333
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+  instance:
+    preferIpAddress: true
+#自定义使用随机策略，springboot-h2是服务应用名
+COMPUTE-SERVICE:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+compute-service2:  ##config ribbon
+  ribbon:
+    eureka:
+      enabled: false
+    listOfServers: localhost:2224, localhost:2225,localhost:2226 ##假设provider有3台instance端口分别是2226 2225 2224
+    ServerListRefreshInterval: 15000
