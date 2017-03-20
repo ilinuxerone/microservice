@@ -1,10 +1,8 @@
 package com.example.configuration;
 
+import com.netflix.client.config.DefaultClientConfigImpl;
 import com.netflix.client.config.IClientConfig;
-import com.netflix.loadbalancer.IPing;
-import com.netflix.loadbalancer.IRule;
-import com.netflix.loadbalancer.PingUrl;
-import com.netflix.loadbalancer.RandomRule;
+import com.netflix.loadbalancer.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +13,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RibbonConfiguration {
-    @Autowired
-    private IClientConfig ribbonClientConfig;
+
+    private String name = "";
+    @Bean
+    public IClientConfig ribbonPing(String name){
+        IClientConfig config = new DefaultClientConfigImpl();
+        config.loadProperties(name);
+        return config;
+    }
 
     /**
      * Our IPing is a PingUrl, which will ping a URL to check the status of each
@@ -33,7 +37,8 @@ public class RibbonConfiguration {
         // ping url will try to access http://microservice-provider/provider/ to
         // see if reponse code is 200 . check PingUrl.isAlive()
         // param /provider/ is the context-path of provider service
-        return new PingUrl(false, "/provider/");
+       // return new PingUrl(false, "/provider/");
+        return new NoOpPing();
     }
 
     /**
@@ -56,7 +61,8 @@ public class RibbonConfiguration {
     @Bean
     public IRule ribbonRule(IClientConfig config) {
         // return new AvailabilityFilteringRule();
-        return new RandomRule();//
+        IRule rule = new RandomRule();
+        return rule;
         // return new BestAvailableRule();
         // return new RoundRobinRule();//轮询
         // return new WeightedResponseTimeRule();

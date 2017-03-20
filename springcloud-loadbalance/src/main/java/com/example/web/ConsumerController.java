@@ -24,7 +24,7 @@ public class ConsumerController {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
 
-    @RequestMapping(value = "/add2", method = RequestMethod.GET)
+    @RequestMapping(value = "/add3", method = RequestMethod.GET)
     public String addCust() {
         ServiceInstance serviceInstance = this.loadBalancerClient.choose("COMPUTE-SERVICE");
         System.out.println("===" + ":" + serviceInstance.getServiceId() + ":" + serviceInstance.getHost() + ":"
