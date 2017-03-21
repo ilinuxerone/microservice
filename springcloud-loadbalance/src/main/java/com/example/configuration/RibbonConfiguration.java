@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * Created by Administrator on 2017/3/19.
  */
 
-//@Configuration
+@Configuration
 public class RibbonConfiguration {
 
 /*    private String name = "COMPUTE-SERVICE";
@@ -20,9 +20,9 @@ public class RibbonConfiguration {
         IClientConfig config = new DefaultClientConfigImpl();
         config.loadProperties(this.name);
         return config;
-    }
+    }*/
 
-    *//**
+    /**
      * Our IPing is a PingUrl, which will ping a URL to check the status of each
      * server.provider has, as you’ll recall, a method mapped to the / path;
      * that means that Ribbon will get an HTTP 200 response when it pings a
@@ -31,17 +31,17 @@ public class RibbonConfiguration {
      * server list defined in application.yml :listOfServers: localhost:8000,
      * localhost:8002,localhost:8003
      *
-     *//*
-    @Bean
+     */
+/*    @Bean
     public IPing ribbonPing(IClientConfig config) {
         // ping url will try to access http://microservice-provider/provider/ to
         // see if reponse code is 200 . check PingUrl.isAlive()
         // param /provider/ is the context-path of provider service
        // return new PingUrl(false, "/provider/");
         return new NoOpPing();
-    }
+    }*/
 
-    *//**
+    /**
      * The IRule we set up, the AvailabilityFilteringRule, will use Ribbon’s
      * built-in circuit breaker functionality to filter out any servers in an
      * “open-circuit” state: if a ping fails to connect to a given server, or if
@@ -57,8 +57,8 @@ public class RibbonConfiguration {
      * ZoneAvoidanceRule  |  复合判断server所在区域的性能和server的可用性选择server  |  使 用ZoneAvoidancePredicate和AvailabilityPredicate来判断是否选择某个server，前一个判断判定一个 zone的运行性能是否可用，剔除不可用的zone（的所有server），AvailabilityPredicate用于过滤掉连接数过多的 Server。
      * @param config
      * @return
-     *//*
-    @Bean
+     */
+/*    @Bean
     public IRule ribbonRule(IClientConfig config) {
         // return new AvailabilityFilteringRule();
         IRule rule = new RandomRule();
