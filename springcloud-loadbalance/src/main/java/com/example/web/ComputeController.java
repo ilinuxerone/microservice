@@ -1,5 +1,6 @@
 package com.example.web;
 
+import com.example.configuration.CustomersRibbonConfiguration;
 import com.example.configuration.RibbonConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -15,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
  */
 
 @RestController
-@RibbonClient(name = "compute-service", configuration = RibbonConfiguration.class)//name是provider的服务
+@RibbonClient(name = "compute-service2", configuration = CustomersRibbonConfiguration.class)//name是provider的服务
 public class ComputeController
 {
     @Autowired
@@ -26,9 +27,9 @@ public class ComputeController
 
     @RequestMapping(value = "/add2", method = RequestMethod.GET)
     public String addCust() {
-        ServiceInstance serviceInstance = this.loadBalancerClient.choose("COMPUTE-SERVICE");
+        ServiceInstance serviceInstance = this.loadBalancerClient.choose("COMPUTE-SERVICE2");
         System.out.println("===" + ":" + serviceInstance.getServiceId() + ":" + serviceInstance.getHost() + ":"
                 + serviceInstance.getPort());// 打印当前调用服务的信息
-        return restTemplate.getForEntity("http://COMPUTE-SERVICE/add?a=10&b=20", String.class).getBody();
+        return restTemplate.getForEntity("http://COMPUTE-SERVICE2/add?a=10&b=20", String.class).getBody();
     }
 }

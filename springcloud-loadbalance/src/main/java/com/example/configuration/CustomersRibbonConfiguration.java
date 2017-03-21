@@ -1,5 +1,6 @@
 package com.example.configuration;
 
+import com.example.annotion.ExcludeFromComponentScan;
 import com.example.filter.MyListFilter;
 import com.example.rule.MyRule;
 import com.netflix.client.config.DefaultClientConfigImpl;
@@ -13,12 +14,14 @@ import org.springframework.context.annotation.Configuration;
  * Created by Administrator on 2017/3/19.
  */
 @Configuration
-public class RibbonConfigurationCust {
-    private String name = "";
+@ExcludeFromComponentScan
+public class CustomersRibbonConfiguration  {
+    private String name = "compute-service2";
 
     @Bean
     public IClientConfig ribbonPing(){
         IClientConfig config = new DefaultClientConfigImpl();
+        config.loadProperties(this.name);
         return config;
     }
 

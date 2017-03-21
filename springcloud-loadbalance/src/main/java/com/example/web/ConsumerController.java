@@ -16,16 +16,17 @@ public class ConsumerController {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    private LoadBalancerClient loadBalancerClient;
+
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add() {
         return restTemplate.getForEntity("http://COMPUTE-SERVICE/add?a=10&b=20", String.class).getBody();
     }
 
-    @Autowired
-    private LoadBalancerClient loadBalancerClient;
 
     @RequestMapping(value = "/add3", method = RequestMethod.GET)
-    public String addCust() {
+    public String add3() {
         ServiceInstance serviceInstance = this.loadBalancerClient.choose("COMPUTE-SERVICE");
         System.out.println("===" + ":" + serviceInstance.getServiceId() + ":" + serviceInstance.getHost() + ":"
                 + serviceInstance.getPort());// 打印当前调用服务的信息
