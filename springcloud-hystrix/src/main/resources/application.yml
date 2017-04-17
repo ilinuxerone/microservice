@@ -7,3 +7,9 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:1111/eureka/
+turbine:
+  aggregator:
+    clusterConfig: CLOUD-SIMPLE-UI
+  appConfig: cloud-simple-ui
+  clusterNameExpression: metadata['cluster']
+#http://localhost:3334/hystrix.stream
